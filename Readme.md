@@ -44,17 +44,17 @@ For this demonstration we are going to be using the SSH jail. If you haven’t a
 
 Now let’s open&nbsp;**/etc/fail2ban/jail.local **and add the Slack notification action.
 
-`[ssh]
+           [ssh]
+           
+           enabled  = true
+           port     = ssh
+           filter   = sshd
+           logpath  = /var/log/auth.log
+           maxretry = 6
+           banaction = iptables-multiport
+                       **slack-notify**
 
-enabled  = true
-port     = ssh
-filter   = sshd
-logpath  = /var/log/auth.log
-maxretry = 6
-banaction = iptables-multiport
-            **slack-notify**
 
-`
 
 The&nbsp;“ssh” configuration block will most likely use the default banaction, which means the property won’t be listed. Add the banaction line, using&nbsp;“slack-notify” as the second command. Save and close the file.
 
