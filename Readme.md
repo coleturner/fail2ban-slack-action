@@ -39,6 +39,7 @@ Save the file. Now it’s time to add this action to one of our jails.
 **Apply the action to your jail(s)**
 
 For this demonstration we are going to be using the SSH jail. If you haven’t already, create a jail.local file for Fail2Ban in case a package update overwrite the default configuration:
+
 `sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local`
 
 Now let’s open&nbsp;**/etc/fail2ban/jail.local **and add the Slack notification action.
