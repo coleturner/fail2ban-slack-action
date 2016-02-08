@@ -29,60 +29,6 @@ With root, use your favorite editor to create the following file:
 
 **/etc/fail2ban/action.d/slack-notify.conf**
 
-`#
-# Author: Cole Turner
-# coleturner.me
-# turner.cole@gmail.com
-#
-
-[Definition]
-
-# Option:  actionstart
-# Notes.:  command executed once at the start of Fail2Ban.
-# Values:  CMD
-#
-actionstart = curl -s -o /dev/null 'https://slack.com/api/chat.postMessage' -d 'token=<slack_api_token>' -d 'channel=#<slack_channel>' -d 'text=Fail2Ban (<name>) jail has started'
-
-# Option:  actionstop
-# Notes.:  command executed once at the end of Fail2Ban
-# Values:  CMD
-#
-actionstop = curl -s -o /dev/null 'https://slack.com/api/chat.postMessage' -d 'token=<slack_api_token>' -d 'channel=#<slack_channel>' -d 'text=Fail2Ban (<name>) jail has stopped'
-
-# Option:  actioncheck
-# Notes.:  command executed once before each actionban command
-# Values:  CMD
-#
-actioncheck =
-
-# Option:  actionban
-# Notes.:  command executed when banning an IP. Take care that the
-#          command is executed with Fail2Ban user rights.
-# Tags:    <ip>  IP address
-#          <failures>  number of failures
-#          <time>  unix timestamp of the ban time
-# Values:  CMD
-#
-
-actionban = curl -s -o /dev/null 'https://slack.com/api/chat.postMessage' -d 'token=<slack_api_token>' -d 'channel=#<slack_channel>' -d 'text=Fail2Ban (<name>) banned IP *<ip>* for <failures> failure(s)'
-
-# Option:  actionunban
-# Notes.:  command executed when unbanning an IP. Take care that the
-#          command is executed with Fail2Ban user rights.
-# Tags:    <ip>  IP address
-#          <failures>  number of failures
-#          <time>  unix timestamp of the ban time
-# Values:  CMD
-#
-actionunban = curl -s -o /dev/null 'https://slack.com/api/chat.postMessage' -d 'token=<slack_api_token>' -d 'channel=#<slack_channel>' -d 'text=Fail2Ban (<name>) unbanned IP *<ip>*'
-
-[Init]
-
-init = 'Sending notification to Slack'
-
-slack_api_token = YOUR_SLACK_API_TOKEN_GOES_HERE
-slack_channel = general
-`
 
 Replace&nbsp;**YOUR_SLACK_API_TOKEN_GOES_HERE**&nbsp;with the API token you created with the Incoming hook. And where it says&nbsp;“**general**,” that’s the channel name (without the pound sign).
 
