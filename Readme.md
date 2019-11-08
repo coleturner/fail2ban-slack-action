@@ -1,7 +1,7 @@
 <p align="center">
   <img width="400" src="./Screenshot%202019-11-08%20at%2009.46.15.png">
   <h3 align="center">Fail2Ban Slack Action</h3>
-  <p align="center">:man-gesturing-no: Slack Notifications for Fail2Ban</p>
+  <p align="center">Slack Notifications for Fail2Ban</p>
 </p>
 
 ## Synopsis
