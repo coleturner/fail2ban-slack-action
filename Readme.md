@@ -1,3 +1,9 @@
+<p align="center">
+  <img width="400" src="./Screenshot%202019-11-08%20at%2009.46.15.png">
+  <h3 align="center">Fail2Ban Slack Action</h3>
+  <p align="center">:man-gesturing-no: Slack Notifications for Fail2Ban</p>
+</p>
+
 ## Synopsis
 
 If you’re like me, staying on top of server logs is near impossible when you’re administrating more than one website. Even if I had the time, I don’t have the screen real estate to tail all of my server logs.
