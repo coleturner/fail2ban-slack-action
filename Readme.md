@@ -1,3 +1,9 @@
+<p align="center">
+  <img width="400" src="./Screenshot%202019-11-08%20at%2009.46.15.png">
+  <h3 align="center">Fail2Ban Slack Action</h3>
+  <p align="center">Slack Notifications for Fail2Ban</p>
+</p>
+
 ## Synopsis
 
 If you’re like me, staying on top of server logs is near impossible when you’re administrating more than one website. Even if I had the time, I don’t have the screen real estate to tail all of my server logs.
@@ -17,9 +23,9 @@ CURL
 
 ## **Step 1.&nbsp;**
 
-**[Generate an Incoming WebHook API Token for Slack:](https://my.slack.com/services/new/incoming-webhook/)**
+**[Generate an Incoming WebHook URL for Slack:](https://my.slack.com/services/new/incoming-webhook/)**
 
-The first thing you will need is an [API token](https://my.slack.com/services/new/incoming-webhook/) that will allow us to issue commands to the Slack REST API. Using an Incoming Webhook, we can send message to the channel of your choice.
+The first thing you will need is an [Incoming Webhook](https://my.slack.com/services/new/incoming-webhook/) that will allow us to issue commands to the Slack REST API. Using an Incoming Webhook, we can send message to the channel of your choice.
 
 ## **Step 2.&nbsp;**
 
@@ -42,13 +48,13 @@ With root, use your favorite editor to create the following file:
 # Notes.:  command executed once at the start of Fail2Ban.
 # Values:  CMD
 #
-actionstart = curl -s -o /dev/null 'https://slack.com/api/chat.postMessage' -d 'token=<slack_api_token>' -d 'channel=#<slack_channel>' -d 'text=Fail2Ban (<name>) jail has started'
+actionstart = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has started\", "channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 # Option:  actionstop
 # Notes.:  command executed once at the end of Fail2Ban
 # Values:  CMD
 #
-actionstop = curl -s -o /dev/null 'https://slack.com/api/chat.postMessage' -d 'token=<slack_api_token>' -d 'channel=#<slack_channel>' -d 'text=Fail2Ban (<name>) jail has stopped'
+actionstop = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has stopped\", "channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 # Option:  actioncheck
 # Notes.:  command executed once before each actionban command
@@ -65,7 +71,7 @@ actioncheck =
 # Values:  CMD
 #
 
-actionban = curl -s -o /dev/null 'https://slack.com/api/chat.postMessage' -d 'token=<slack_api_token>' -d 'channel=#<slack_channel>' -d 'text=Fail2Ban (<name>) banned IP *<ip>* for <failures> failure(s)'
+actionban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) banned IP *<ip>* for <failures> failure(s)\", "channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 # Option:  actionunban
 # Notes.:  command executed when unbanning an IP. Take care that the
@@ -75,18 +81,20 @@ actionban = curl -s -o /dev/null 'https://slack.com/api/chat.postMessage' -d 'to
 #          <time>  unix timestamp of the ban time
 # Values:  CMD
 #
-actionunban = curl -s -o /dev/null 'https://slack.com/api/chat.postMessage' -d 'token=<slack_api_token>' -d 'channel=#<slack_channel>' -d 'text=Fail2Ban (<name>) unbanned IP *<ip>*'
+actionunban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) unbanned IP *<ip>*\", "channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 [Init]
 
 init = 'Sending notification to Slack'
 
-slack_api_token = YOUR_SLACK_API_TOKEN_GOES_HERE
+# Put the values here without quotation marks
+# The channel name should be without the leading # too!
 slack_channel = general
+slack_webhook_url = https://hooks.slack.com/XXXXXXX
 ```
 
 
-Replace&nbsp;**YOUR_SLACK_API_TOKEN_GOES_HERE**&nbsp;with the API token you created with the Incoming hook. And where it says&nbsp;“**general**,” that’s the channel name (without the pound sign).
+Replace **https://hooks.slack.com/XXXXXXX** with the API token you created with the Incoming hook. And where it says&nbsp;“**general**,” that’s the channel name (without the pound sign). You need to provide this even if you have configured the channel for the webhook.
 
 Save the file. Now it’s time to add this action to one of our jails.
 
@@ -109,7 +117,7 @@ filter   = sshd
 logpath  = /var/log/auth.log
 maxretry = 6
 banaction = iptables-multiport
-            **slack-notify**
+            slack-notify
 ```
 
 
@@ -123,3 +131,7 @@ _Fail2Ban (ssh) jail has started_
 ## License
 
 Use it and abuse it, just don't lose it.
+
+## Contributors
+Cole Turner (@coleturner)
+Josh Ghent (@joshghent)
