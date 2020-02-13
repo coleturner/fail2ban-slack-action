@@ -131,3 +131,7 @@ _Fail2Ban (ssh) jail has started_
 ## License
 
 Use it and abuse it, just don't lose it.
+
+## Contributors
+Cole Turner (@coleturner)
+Josh Ghent (@joshghent)
