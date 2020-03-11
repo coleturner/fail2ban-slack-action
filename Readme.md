@@ -48,13 +48,13 @@ With root, use your favorite editor to create the following file:
 # Notes.:  command executed once at the start of Fail2Ban.
 # Values:  CMD
 #
-actionstart = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has started\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
+actionstart = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has started.\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 # Option:  actionstop
 # Notes.:  command executed once at the end of Fail2Ban
 # Values:  CMD
 #
-actionstop = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has stopped\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
+actionstop = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has stopped.\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 # Option:  actioncheck
 # Notes.:  command executed once before each actionban command
@@ -71,7 +71,7 @@ actioncheck =
 # Values:  CMD
 #
 
-actionban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) banned IP *<ip>* for <failures> failure(s)\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
+actionban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) banned IP *<ip>* for <failures> failure(s)\. Unban with \`sudo fail2ban-client unban <name> <ip>\`.", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 # Option:  actionunban
 # Notes.:  command executed when unbanning an IP. Take care that the
@@ -81,7 +81,7 @@ actionban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"
 #          <time>  unix timestamp of the ban time
 # Values:  CMD
 #
-actionunban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) unbanned IP *<ip>*\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
+actionunban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) unbanned IP *<ip>*.\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 [Init]
 
