@@ -48,13 +48,13 @@ With root, use your favorite editor to create the following file:
 # Notes.:  command executed once at the start of Fail2Ban.
 # Values:  CMD
 #
-actionstart = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has started\", "channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
+actionstart = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has started\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 # Option:  actionstop
 # Notes.:  command executed once at the end of Fail2Ban
 # Values:  CMD
 #
-actionstop = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has stopped\", "channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
+actionstop = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) jail has stopped\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 # Option:  actioncheck
 # Notes.:  command executed once before each actionban command
