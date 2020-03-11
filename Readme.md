@@ -71,7 +71,7 @@ actioncheck =
 # Values:  CMD
 #
 
-actionban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) banned IP *<ip>* for <failures> failure(s)\", "channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
+actionban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) banned IP *<ip>* for <failures> failure(s)\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 # Option:  actionunban
 # Notes.:  command executed when unbanning an IP. Take care that the
@@ -81,7 +81,7 @@ actionban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"
 #          <time>  unix timestamp of the ban time
 # Values:  CMD
 #
-actionunban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) unbanned IP *<ip>*\", "channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
+actionunban = curl -s -o /dev/null -X POST --data-urlencode "payload={\"text\": \"Fail2Ban (<name>) unbanned IP *<ip>*\", \"channel\": \"#<slack_channel>\" }" '<slack_webhook_url>'
 
 [Init]
 
